@@ -6,7 +6,7 @@ require 'yaml'
 
 class BuscandoCasaScraper < Scraper
   def initialize
-    @urls = open('urls.yml'){ |f| YAML.load(f) }
+    @urls = open('../config/urls.yml'){ |f| YAML.load(f) }
   end
 
   def houses_reference_ids
@@ -21,21 +21,14 @@ class BuscandoCasaScraper < Scraper
   end
 
   def scrap_house reference_id
+    # scraping_values = open('../config/scraping_values.yml'){ |f| YAML.load(f) }
     document = get_document_from_url 'house_definition_base', reference_id
     house_params = 
       document.css('td.tabla2').zip(document.css('td.tabla2+th')).inject({}) do |result, val| 
-        result[clean_field val.first] = clean_field val[1] if val[1] && val.first #.second 
+        # TODO: hacerme second? 
+        result[clean_field val.first] = val[1].children.map{|children| children.content unless children.content.empty?}.compact.join("; ") if val[1] && val.first 
         result
       end
-  end
-
-  def save house_params
-    # TODO cambiar esto por algo mejor  
-    # House.create!(:address => house_params['direccion'],
-    #               :dorms => house_params['dormitorios'],
-    #               :surface => house_params['superficie edificada'],
-    #               :ref => ref)
-    # :description => house_params['descripcion'],
   end
 end
 

@@ -8,6 +8,6 @@ refs.each do |ref|
   puts ref
   puts '*-----------------------------------*'
   house_data = bc.scrap_house ref
-  puts house_data.inspect
+  puts (bc.save house_data).inspect
 end
 

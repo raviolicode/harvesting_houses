@@ -1,0 +1,4 @@
+dormitorios: 'td.tabla2+th'
+direccion: 'td.tabla2+th'
+superficie_edificada: 'td.tabla2+th'
+
