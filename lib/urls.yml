@@ -1,0 +1,2 @@
+house_definition_base: 'http://www.buscandocasa.com.uy/bc/inmueble.asp?ref='
+search_houses_base: 'http://www.buscandocasa.com.uy/bc/apartamentosalquiler.asp?where=WHERE'
