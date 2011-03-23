@@ -1,11 +1,5 @@
 # TODO: make a factory
 class Scraper
-  # def get_houses_list
-  # end 
-
-  # def scrap_house
-  # end
-
   def clean_field element 
     # TODO: bad smell! esto no va aca!
     element.inner_html.gsub(/&nbsp;/, '').downcase

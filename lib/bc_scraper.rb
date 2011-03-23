@@ -15,9 +15,9 @@ class BuscandoCasaScraper < Scraper
     conditions_equal = {'dormitorios' => 0, 'alquileres.alquilado' => 'N', 'ciudades.idciudad' => 1, 'zonas.idZona' => 1, 'G00' => 's', 'unidad' => 'p', 'va' => 'S'}
     conditions_less_or_equal = {'preciomensualidad' => 9000, 'year(apartamentos.fua)' => 2010}
     search_conditions = build_conditions_query conditions_equal, conditions_less_or_equal 
-
     document = get_document_from_url 'search_houses_base', search_conditions 
-    refs = document.css('input').map{|e| e.attributes['value'].value}
+
+    document.css('input').map{|e| e.attributes['value'].value}
   end
 
   def scrap_house reference_id
@@ -27,8 +27,6 @@ class BuscandoCasaScraper < Scraper
         result[clean_field val.first] = clean_field val[1] if val[1] && val.first #.second 
         result
       end
-
-    house_params
   end
 
   def save house_params
