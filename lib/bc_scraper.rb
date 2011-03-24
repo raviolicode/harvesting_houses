@@ -6,8 +6,7 @@ require 'yaml'
 
 class BuscandoCasaScraper < Scraper
   def initialize
-    url = File.join(File.dirname(__FILE__), '/../config/urls.yml')
-    @urls = open(url){ |f| YAML.load(f) }
+    @urls = Scraper.load_config('urls')
   end
 
   def houses_reference_ids
@@ -22,9 +21,8 @@ class BuscandoCasaScraper < Scraper
   end
 
   def scrap_house reference_id
-    url = File.join(File.dirname(__FILE__), '..', 'config', 'scraping_values.yml')
-    scraping_values = open(url){ |f| YAML.load(f) }
     document = get_document_from_url 'house_definition_base', reference_id
+    scraping_values = Scraper.load_config('scraping_values') 
     
     # solution for malformed HTML in every possible way
     # TODO: look for different cases if param_location fits every case
