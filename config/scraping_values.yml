@@ -1,4 +1,18 @@
-dormitorios: 'td.tabla2+th'
-direccion: 'td.tabla2+th'
-superficie_edificada: 'td.tabla2+th'
+# dormitorios: '/html/x:body/x:center/x:table[3]/x:tbody/x:tr[2]/x:th[2]/x:font' #'td.tabla2+th'
+piso: 
+  xpath: '//table[2]//tr[2]/th[2]//th/text()'
+  index: 1
+ubicacion: 
+  xpath: '//table[2]//tr[2]/th[2]//th/text()'
+  index: 3
+anio_construccion: 
+  xpath: '//table[2]//tr[2]/th[2]//th/text()'
+  index: 5
+estado: 
+  xpath: '//table[2]//tr[2]/th[2]//th/text()'
+  index: 7
+precio: 
+  xpath: '//div/table/tr[2]/th[2]/font/node()'
+  index: 0
+  
 

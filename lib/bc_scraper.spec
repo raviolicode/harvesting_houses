@@ -22,9 +22,14 @@ describe BuscandoCasaScraper do
     house_data = @bc.scrap_house reference_id 
     house_data.should_not be_empty
 
-    house_data['direccion'].should_not be_empty
-    house_data['dormitorios'].should_not be_empty
-    house_data['superficie edificada'].should_not be_empty
+    # house_data['direccion'].should_not be_empty
+    # house_data['dormitorios'].should_not be_empty
+
+    house_data['piso'].should_not be_empty 
+    house_data['precio'].should_not be_empty
+    house_data['estado'].should_not be_empty
+    house_data['anio_construccion'].should_not be_empty
+    # house_data['superficie edificada'].should_not be_empty
   end
 end
 

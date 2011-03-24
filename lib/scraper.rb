@@ -21,17 +21,15 @@ class Scraper
   end
 
   def save house_params
-    puts "Direccion: " + house_params['direccion'] 
-    puts "Ubicacion: " + house_params['ubicacion']
-    puts "Dormitorios: " + house_params['dormitorios'] 
-    puts "Superficie: " + house_params['superficie edificada'] 
-    puts "Descripcion: " + house_params['descripcion'].inspect
+    house_params.each{|param, value| puts "#{param.capitalize}: #{value}" }
     # TODO cambiar esto por algo mejor  
     # House.create!(:address => house_params['direccion'],
     #               :dorms => house_params['dormitorios'],
     #               :surface => house_params['superficie edificada'],
     #               :ref => ref)
     # :description => house_params['descripcion'],
+    #
+    # House.create!(params)
   end
 end
 
