@@ -1,5 +1,5 @@
 require 'rubygems'
-require_relative 'bc_scraper'
+require File.join(File.dirname(__FILE__), 'lib', 'bc_scraper')
 
 bc = BuscandoCasaScraper.new
 refs = bc.houses_reference_ids

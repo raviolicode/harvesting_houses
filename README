@@ -1,3 +1,45 @@
+SCRAPING HOUSES
+========================================================================
+
 This gem scrapes from housing listings in Uruguay into a sqlite database.
 
+To try it, run: 
+$ ruby main.rb
+
+To test it, run:
+$ rspec test/bc_scraper.rb
+
+
+How it works:
+========================================================================
+At the moment, it only scrapes BuscandoCasa.com. 
+
+Config Files:
+========================================================================
+config/scraping_data.yml:
+  This file has all the parameters scraped for a particular house
+  For each parameter, it is needed an xpath and an index. This is needed
+for now, because the HTML scraped is malformed. 
+
+config/urls.yml:
+  This file contains the urls needed to access the site
+
+
+========================================================================
+Changelog:
+
+* v.0.0.1:
+1. It scrapes for a fixed condition, all the houses
+2. Gets certain details for a particular house
+
+TODO:
+========================================================================
+1. Add all the attributes needed for mi_lugar
+2. Further process the scraped data:
+  * save the currency in a separate field
+  * clean unnecesary comments (like OFERTA, or extra spaces) 
+  * in dorms, change 1amb to 0 
+3. Test more precisely the data (needs 2)
+4. Change params names in YML to english names
+5. Scrape Gallito, etc
 

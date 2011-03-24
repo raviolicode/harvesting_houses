@@ -1,5 +1,5 @@
-require_relative "bc_scraper" 
-require 'nokogiri'
+require(File.join(File.dirname(__FILE__), '..', 'lib', 'bc_scraper'))
+# require 'nokogiri'
 
 describe BuscandoCasaScraper do
   #TODO: usar mocks y archivos locales para no conectarme a internet?
