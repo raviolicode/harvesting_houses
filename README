@@ -3,10 +3,10 @@ SCRAPING HOUSES
 
 This gem scrapes from housing listings in Uruguay into a sqlite database.
 
-To try it, run: 
+To try it: 
 $ ruby main.rb
 
-To test it, run:
+Test:
 $ rspec test/bc_scraper.rb
 
 
@@ -40,6 +40,5 @@ TODO:
   * clean unnecesary comments (like OFERTA, or extra spaces) 
   * in dorms, change 1amb to 0 
 3. Test more precisely the data (needs 2)
-4. Change params names in YML to english names
-5. Scrape Gallito, etc
+4. Scrape Gallito, etc
 
