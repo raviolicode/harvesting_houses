@@ -1,17 +1,17 @@
 # dormitorios: '/html/x:body/x:center/x:table[3]/x:tbody/x:tr[2]/x:th[2]/x:font' #'td.tabla2+th'
-piso: 
+floor: 
   xpath: '//table[2]//tr[2]/th[2]//th/text()'
   index: 1
-ubicacion: 
+orientation: 
   xpath: '//table[2]//tr[2]/th[2]//th/text()'
   index: 3
-anio_construccion: 
+construction_year: 
   xpath: '//table[2]//tr[2]/th[2]//th/text()'
   index: 5
-estado: 
+quality: 
   xpath: '//table[2]//tr[2]/th[2]//th/text()'
   index: 7
-precio: 
+price: 
   xpath: '//div/table/tr[2]/th[2]/font/node()'
   index: 0
   

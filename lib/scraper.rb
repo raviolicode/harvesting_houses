@@ -22,13 +22,6 @@ class Scraper
 
   def save house_params
     house_params.each{|param, value| puts "#{param.capitalize}: #{value}" }
-    # TODO cambiar esto por algo mejor  
-    # House.create!(:address => house_params['direccion'],
-    #               :dorms => house_params['dormitorios'],
-    #               :surface => house_params['superficie edificada'],
-    #               :ref => ref)
-    # :description => house_params['descripcion'],
-    #
     # House.create!(params)
   end
 end
