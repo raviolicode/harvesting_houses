@@ -25,7 +25,7 @@ describe GallitoLuisScraper do
     page = @scraper.search_houses_form
     search_params =  @scraper.get_search_params page, ["la comercial"]
     search_params.should_not be_empty
-    search_params.first.should be_eql "Check$53"
+    search_params.first.should be_eql "Chkbar$53"
   end
 
   #TODO: make it work!

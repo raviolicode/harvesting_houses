@@ -12,7 +12,7 @@ class GallitoLuisScraper < Scraper
 
   def get_search_params page, selected_neighborhoods
     all_neighborhoods = neighborhoods page
-    selected_neighborhoods.map{|n| "Check$#{all_neighborhoods[n]}"}  
+    selected_neighborhoods.map{|n| "Chkbar$#{all_neighborhoods[n]}"}  
   end
 
   def search_houses_form
@@ -22,19 +22,24 @@ class GallitoLuisScraper < Scraper
 
   def search_houses
     page = search_houses_form
+    form = page.forms.first
     # TODO dummy, make search parameters list!
-    neighborhoods = get_search_params page, ["la comercial"] 
+    n = get_search_params page, ["la comercial"] 
 
-    page.forms.first['__EVENTTARGET'] = neighborhoods.first 
-    page.forms.first['__EVENTARGUMENT'] = ''
+    form['__EVENTTARGET'] = n.first 
+    form['__EVENTARGUMENT'] = ''
+
+    # n = neighborhoods page
 
     # TODO: make this work
-    # puts page.forms.first.checkbox(:name => 'Chkbar$53').node.inspect
-    # neighborhoods.each{|neighborhood| page.forms.first.checkbox_with(:name => neighborhood).check }
-    # p = page.forms.first.submit()
+    puts n.inspect
+    n.each{|input_value| page.forms.first.checkbox(:name => input_value).check }
+    puts page.forms.first.checkbox(:name => 'Chkbar$53').node.inspect
+    p = page.forms.first.submit()
 
-    # doc = Nokogiri::HTML(p.body)
-    # # doc.search('script').find('src~=WebResource')
+    doc = Nokogiri::HTML(p.body)
+    puts doc.search('script').find('src~=WebResource').inspect
+    doc.search('script')#.find('src~=WebResource')
   end
 
   def scrap_house reference_id
