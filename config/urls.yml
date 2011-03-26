@@ -1,2 +1,4 @@
-house_definition_base: 'http://www.buscandocasa.com.uy/bc/inmueble.asp?ref='
-search_houses_base: 'http://www.buscandocasa.com.uy/bc/apartamentosalquiler.asp?where=WHERE'
+buscando_casa_search_properties: 'http://www.buscandocasa.com.uy/bc/apartamentosalquiler.asp?where=WHERE'
+buscando_casa_house_details: 'http://www.buscandocasa.com.uy/bc/inmueble.asp?ref='
+gallito_search_properties: 'http://www.gallito.com.uy/Propiedades_Mapa'
+

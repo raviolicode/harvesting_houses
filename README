@@ -40,5 +40,7 @@ TODO:
   * clean unnecesary comments (like OFERTA, or extra spaces) 
   * in dorms, change 1amb to 0 
 3. Test more precisely the data (needs 2)
-4. Scrape Gallito, etc
+4. Add search parameters for searching houses from the command line
+    harvest_houses price:4000 currency:$U [...]  
+5. Use Mechanize for Buscando Casa
 

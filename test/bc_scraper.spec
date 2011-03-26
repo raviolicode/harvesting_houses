@@ -1,7 +1,7 @@
 require(File.join(File.dirname(__FILE__), '..', 'lib', 'bc_scraper'))
 
 describe BuscandoCasaScraper do
-  #TODO: usar mocks y archivos locales para no conectarme a internet?
+  # TODO: Use separate tests for testing locally and remotely
   
   before do
     @bc = BuscandoCasaScraper.new
@@ -12,14 +12,14 @@ describe BuscandoCasaScraper do
     pending("this test belongs to scraper")
   end
 
-  it "get_document_from_url should get a NOKOGIRI document" do
+  it "url and conditions should be ok" do
     pending("should parse conditions instead of having these fixed conditions")
     doc = @bc.get_document_from_url('search_houses_base', '(dormitorios=0 AND preciomensualidad<=9000 AND zonas.idZona=1)')
     doc.should be_an_instance_of(Nokogiri::HTML::Document)
   end
 
   it "should get houses definitions" do
-    @bc.should have(2).houses_reference_ids
+    @bc.should have(2).search_houses
   end
 
   it "should scrap data from house definition" do

@@ -4,24 +4,25 @@ require 'open-uri'
 require 'nokogiri'
 require 'yaml'
 
+# TODO Use Mechanize!!
 class BuscandoCasaScraper < Scraper
-  def initialize
-    @urls = Scraper.load_config('urls')
-  end
+  # def initialize
+  #   @urls = Scraper.load_config('urls')
+  # end
 
-  def houses_reference_ids
+  def search_houses 
     # TODO: build conditions outside the method
     # TODO: need more flexible conditions
     conditions_equal = {'dormitorios' => 0, 'alquileres.alquilado' => 'N', 'ciudades.idciudad' => 1, 'zonas.idZona' => 1, 'G00' => 's', 'unidad' => 'p', 'va' => 'S'}
     conditions_less_or_equal = {'preciomensualidad' => 9000, 'year(apartamentos.fua)' => 2010}
     search_conditions = build_conditions_query conditions_equal, conditions_less_or_equal 
-    document = get_document_from_url 'search_houses_base', search_conditions 
+    document = get_document_from_url 'buscando_casa_search_properties', search_conditions 
 
     document.css('input').map{|e| e.attributes['value'].value}
   end
 
   def scrap_house reference_id
-    document = get_document_from_url 'house_definition_base', reference_id
+    document = get_document_from_url 'buscando_casa_house_details', reference_id
     scraping_values = Scraper.load_config('scraping_values') 
     
     # solution for malformed HTML in every possible way

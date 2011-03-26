@@ -1,5 +1,9 @@
 # TODO: make a factory
 class Scraper
+  def initialize
+    @urls = Scraper.load_config('urls')
+  end
+
   def build_conditions_query conditions_equal, conditions_less_or_equal
     #TODO: should be a class method?
     #TODO: complete and remove repetition 
