@@ -17,7 +17,7 @@ describe GallitoLuisScraper do
 
   it "should get a search form" do
     page = @scraper.search_houses_form
-    page.should be_instance_of(Mechanize::Page)
+    page.should be_instance_of(Mechanize::Form)
   end
 
   it "should get search params" do

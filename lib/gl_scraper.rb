@@ -9,9 +9,9 @@ class GallitoLuisScraper < Scraper
     {"la comercial" => "53"}
   end
 
-  def get_search_params page, selected_neighborhoods
-    neighborhoods = all_neighborhoods page
-    selected_neighborhoods.map{|n| "Chkbar$#{all_neighborhoods[n]}"}  
+  def get_search_params form, selected_neighborhoods
+    neighborhoods = all_neighborhoods form 
+    selected_neighborhoods.map{|n| "Chkbar$#{neighborhoods[n]}"}  
   end
 
   def search_houses_form
@@ -23,10 +23,10 @@ class GallitoLuisScraper < Scraper
   def search_houses
     form = search_houses_form
     # TODO dummy, make search parameters list!
-    neighborhoods = get_search_params page, ["la comercial"] 
+    neighborhoods = get_search_params form, ["la comercial"] 
 
     # submit search form
-    form['__EVENTTARGET'] = n.first 
+    form['__EVENTTARGET'] = neighborhoods.first 
     form['__EVENTARGUMENT'] = ''
     neighborhoods.each{|input_value| form.checkbox(:name => input_value).check }
     page = form.submit()
@@ -34,14 +34,14 @@ class GallitoLuisScraper < Scraper
     get_houses_list_from_response page
   end
 
-  def get_houses_list_from_response
+  def get_houses_list_from_response page
     doc = Nokogiri::HTML(page.body)
     scripts = doc.search('script')
-    google_maps_script = scripts.find{|s| s.children.length > 0 && s.children.first.content[/GMapsProperties/]}.content
+    # google_maps_script = scripts.find{|s| s.children.length > 0 && s.children.first.content[/GMapsProperties/]}.content
 
-    without_cdata_regexp = /\r\n\/\/<!\[CDATA\[\r\n(.*)\/\/\]\]/
-    script_without_cdata = script[without_cdata_regexp, 1] 
-    info_window_sentence = script_without_cdata[/7906_.openInfoWindowHtml\(\'(.*)\'\);/]
+    # without_cdata_regexp = /\r\n\/\/<!\[CDATA\[\r\n(.*)\/\/\]\]/
+    # script_without_cdata = google_maps_script[without_cdata_regexp, 1] 
+    # info_window_sentence = google_maps_script[/7906_.openInfoWindowHtml\(\'(.*)\'\);/]
   end
 
   def scrap_house reference_id
