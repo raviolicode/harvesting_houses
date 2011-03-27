@@ -1,18 +1,18 @@
 require(File.join(File.dirname(__FILE__), '..', 'lib', 'gl_scraper'))
 
 describe GallitoLuisScraper do 
-  # TODO: Use separate tests for testing locally and remotely
+  # TODO: I should use Mocks to run locally!!! 
 
   before do
     @scraper = GallitoLuisScraper.new
   end
 
-  it "neighboorhoods should not be empty" do
-    pending ""
+  it "should have list of neighborhoods not empty" do
+    pending("")
   end
 
   it "should have search parameters that work ok" do
-    pending ""
+    pending("")
   end
 
   it "should get a search form" do
@@ -28,7 +28,6 @@ describe GallitoLuisScraper do
     search_params.first.should be_eql "Chkbar$53"
   end
 
-  #TODO: make it work!
   it "should submit the form and get a body" do
     @scraper.search_houses.should be_instance_of(Nokogiri::XML::NodeSet)    
   end

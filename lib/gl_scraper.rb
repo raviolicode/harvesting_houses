@@ -2,44 +2,46 @@ require 'mechanize'
 require_relative 'scraper'
 
 class GallitoLuisScraper < Scraper
-  #
-  #TODO: this should be done in a separate task?
+  #TODO: this should be done in a separate task or it should be in a config file?
   #TODO: this shouldn't change very often
-  def neighborhoods page
+  def all_neighborhoods page
     #TODO: dummy!
     {"la comercial" => "53"}
   end
 
   def get_search_params page, selected_neighborhoods
-    all_neighborhoods = neighborhoods page
+    neighborhoods = all_neighborhoods page
     selected_neighborhoods.map{|n| "Chkbar$#{all_neighborhoods[n]}"}  
   end
 
   def search_houses_form
     url = URI.escape(get_url_from_config 'gallito_search_properties')
     page = Mechanize.new.get(url)
+    form = page.forms.first
   end
 
   def search_houses
-    page = search_houses_form
-    form = page.forms.first
+    form = search_houses_form
     # TODO dummy, make search parameters list!
-    n = get_search_params page, ["la comercial"] 
+    neighborhoods = get_search_params page, ["la comercial"] 
 
+    # submit search form
     form['__EVENTTARGET'] = n.first 
     form['__EVENTARGUMENT'] = ''
+    neighborhoods.each{|input_value| form.checkbox(:name => input_value).check }
+    page = form.submit()
 
-    # n = neighborhoods page
+    get_houses_list_from_response page
+  end
 
-    # TODO: make this work
-    puts n.inspect
-    n.each{|input_value| page.forms.first.checkbox(:name => input_value).check }
-    puts page.forms.first.checkbox(:name => 'Chkbar$53').node.inspect
-    p = page.forms.first.submit()
+  def get_houses_list_from_response
+    doc = Nokogiri::HTML(page.body)
+    scripts = doc.search('script')
+    google_maps_script = scripts.find{|s| s.children.length > 0 && s.children.first.content[/GMapsProperties/]}.content
 
-    doc = Nokogiri::HTML(p.body)
-    puts doc.search('script').find('src~=WebResource').inspect
-    doc.search('script')#.find('src~=WebResource')
+    without_cdata_regexp = /\r\n\/\/<!\[CDATA\[\r\n(.*)\/\/\]\]/
+    script_without_cdata = script[without_cdata_regexp, 1] 
+    info_window_sentence = script_without_cdata[/7906_.openInfoWindowHtml\(\'(.*)\'\);/]
   end
 
   def scrap_house reference_id
